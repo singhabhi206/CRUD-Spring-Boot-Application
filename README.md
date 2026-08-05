@@ -97,7 +97,7 @@ All REST APIs were tested using **Postman**.
 
 **Abhishek Kumar Singh**
 
-- GitHub: https://github.com/singhabhishek206
+- GitHub: https://github.com/singhabhi206
 - LinkedIn: https://www.linkedin.com/in/abhishek-kumar-singh-369335296/
 
 ---
