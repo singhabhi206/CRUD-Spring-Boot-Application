@@ -1,7 +1,12 @@
 package in.abhishek.crudSpringBootDemo.controller;
 
+import in.abhishek.crudSpringBootDemo.dto.CreateStudentRequestDto;
+import in.abhishek.crudSpringBootDemo.dto.CreateStudentResponseDto;
+import in.abhishek.crudSpringBootDemo.dto.UpdateStudentRequestDto;
+import in.abhishek.crudSpringBootDemo.dto.UpdateStudentResponseDto;
 import in.abhishek.crudSpringBootDemo.entity.Student;
 import in.abhishek.crudSpringBootDemo.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +25,8 @@ public class StudentController {
 
     // Create Student
     @PostMapping
-    public ResponseEntity<Student> createStudent(@RequestBody Student student){
-        Student createdStudent=studentService.createStudent(student);
-
+    public ResponseEntity<CreateStudentResponseDto> createStudent(@Valid @RequestBody CreateStudentRequestDto studentRequestDto){
+        CreateStudentResponseDto createdStudent=studentService.createStudent(studentRequestDto);
         // To print on postman console
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -30,44 +34,41 @@ public class StudentController {
     }
 
     // Read the value of table
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable Long id){
-        Student studentResp=studentService.getStudent(id);
-        if(studentResp==null)   return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping("/{id}")
+    public ResponseEntity<CreateStudentResponseDto> getStudent(@PathVariable Long id){
+        CreateStudentResponseDto studentResp=studentService.getStudent(id);
+
         return ResponseEntity.ok(studentResp);
     }
 
     // Read all student data
-    @GetMapping("/getAll")
-    public ResponseEntity<List<Student>> getAllStudent(){
-        List<Student> studentResp=studentService.getAllStudent();
-        if(studentResp.isEmpty())   return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping
+    public ResponseEntity<List<CreateStudentResponseDto>> getAllStudent(){
+        List<CreateStudentResponseDto> studentResp=studentService.getAllStudent();
+
         return ResponseEntity.ok(studentResp);
     }
 
     // Update the detail
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student studentReq){
-        Student studentResp=studentService.updateStudent(id,studentReq);
-        if(studentResp==null)   return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        return ResponseEntity.ok(studentResp);
+    @PutMapping
+    public ResponseEntity<UpdateStudentResponseDto> updateStudent(@PathVariable Long id, @RequestBody UpdateStudentRequestDto updateStudentRequestDto){
+        UpdateStudentResponseDto updateStudentResponseDto=studentService.updateStudent(id,updateStudentRequestDto);
+        return ResponseEntity.ok(updateStudentResponseDto);
     }
 
     // Delete the data
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping
     public ResponseEntity<String> deleteStudent(@PathVariable Long id){
-        Boolean isDeleted=studentService.deleteStudent(id);
-        if(!isDeleted)     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Record does not exist with id "+id);
-        return ResponseEntity.ok("Record Deleted Successfully.");
+        studentService.deleteStudent(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     // Soft delete
     @PatchMapping("/delete-soft/{id}")
     public ResponseEntity<String> deleteStudentSoft(@PathVariable Long id){
-        Boolean isDelete=studentService.deleteStudentSofl(id);
-        if(isDelete)    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Record does not exist");
+        studentService.deleteStudentSoft(id);
 
-        return ResponseEntity.ok("Record Deleted Successfully.");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
