@@ -1,6 +1,8 @@
 # CRUD Spring Boot Application
 
-A RESTful CRUD application built using **Spring Boot**, **Spring Data JPA**, and **MySQL**. This project demonstrates complete CRUD operations, including **Hard Delete** and **Soft Delete**, with APIs tested using **Postman**.
+A RESTful CRUD application built using **Spring Boot**, **Spring Data JPA**, and **MySQL**. This project demonstrates complete CRUD operations, including **Create**, **Read**, **Update**, **Hard Delete** and **Soft Delete**, with APIs tested using **Postman**.
+
+## 🚀 Features
 
 ## 🚀 Features
 
@@ -8,8 +10,11 @@ A RESTful CRUD application built using **Spring Boot**, **Spring Data JPA**, and
 - 📄 Retrieve all students
 - 🔍 Retrieve a student by ID
 - ✏️ Update student details
-- ❌ Hard Delete a student
-- ♻️ Soft Delete a student
+- ❌ Hard delete a student
+- ♻️ Soft delete a student
+- 📦 DTO-based request and response handling
+- ⚠️ Custom REST API exception handling
+- 🔐 Global exception handling and Input validation
 - 💾 MySQL database integration
 - 🧪 API testing using Postman
 
@@ -31,7 +36,9 @@ src
 ├── main
 │   ├── java
 │   │   ├── controller
+│   │   ├── dto
 │   │   ├── entity
+│   │   ├── exception
 │   │   ├── repository
 │   │   ├── service
 │   │   └── CrudSpringBootDemoApplication.java
@@ -45,10 +52,10 @@ src
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/students` | Create a new student |
-| GET | `/students/getAll` | Get all students |
-| GET | `/students/get/id` | Get student by ID |
-| PUT | `/students/update/id` | Update student |
-| DELETE | `/students/delete/id` | Hard delete student |
+| GET | `/students` | Get all students |
+| GET | `/students/id` | Get student by ID |
+| PUT | `/students/id` | Update student |
+| DELETE | `/students/id` | Hard delete student |
 | PATCH | `/students/delete-soft/id` | Soft delete student |
 
 > Replace the endpoint names if they are different in your project.
