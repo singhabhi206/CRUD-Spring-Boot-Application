@@ -4,8 +4,6 @@ A RESTful CRUD application built using **Spring Boot**, **Spring Data JPA**, and
 
 ## 🚀 Features
 
-## 🚀 Features
-
 - ➕ Create a new student
 - 📄 Retrieve all students
 - 🔍 Retrieve a student by ID
