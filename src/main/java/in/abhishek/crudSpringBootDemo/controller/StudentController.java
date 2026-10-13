@@ -50,14 +50,14 @@ public class StudentController {
     }
 
     // Update the detail
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<UpdateStudentResponseDto> updateStudent(@PathVariable Long id, @RequestBody UpdateStudentRequestDto updateStudentRequestDto){
         UpdateStudentResponseDto updateStudentResponseDto=studentService.updateStudent(id,updateStudentRequestDto);
         return ResponseEntity.ok(updateStudentResponseDto);
     }
 
     // Delete the data
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable Long id){
         studentService.deleteStudent(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
